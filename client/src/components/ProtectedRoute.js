@@ -17,7 +17,6 @@ const ProtectedRoute = ({children}) => {
             dispatch(showLoading())
             // make API call to get current user
             const response = await GetCurrentUser();
-            console.log(response,"helo")
             // hide loader
             dispatch(hideLoading())
             if(response.success) {          
