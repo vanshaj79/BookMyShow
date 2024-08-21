@@ -11,6 +11,7 @@ import "./stylesheets/form-elements.css"
 import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
+import TheatresForMovie from './pages/TheatresForMovie';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
+          <Route path='/movie/:movieId' element={<ProtectedRoute><TheatresForMovie/></ProtectedRoute>}></Route>
         </Routes>
       </BrowserRouter>
     </>
