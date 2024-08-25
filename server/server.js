@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors")
 require('dotenv').config() 
 // this will load your all environment variables from a '.env' file into 'process.env'in your project.
 // the config() function call loads the variables from the '.env' file into the environment , making them accessible to the project
@@ -9,6 +10,9 @@ const app = express();
 const dbConfig = require('./config/dbConfig')
 // connecting to database
 
+app.use(cors({
+    origin:"*"
+}))
 
 // importing routes
 const userRoutes = require('./routes/userRoutes')

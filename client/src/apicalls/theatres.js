@@ -50,10 +50,11 @@ export const DeleteTheatre = async (payload) => {
     }
 }
 
-export const GetTheatresByMovie = async (movieId) => {
+export const GetTheatresByMovie = async (payload) => {
   const axiosInstance = getAxiosInstance();
   try {
-    const response = await axiosInstance.get(`api/theatres/getTheatresByMovieId/${movieId}`)
+    const response = await axiosInstance.post("api/movies/getTheatresByMovieId",payload );
+    return response.data
   } catch (error) {
     return error;
   }

@@ -36,7 +36,7 @@ const TheatresForMovie = () => {
       dispatch(showLoading);
       const response = await GetTheatresByMovie({date, movie: movieId});
       if(response.message){
-        setMovie(response.data);
+        console.log(response)
       }else{
         message.error(response.message)
       }
@@ -53,7 +53,7 @@ const TheatresForMovie = () => {
   useEffect(()=>{
     getTheatres();
   },[])
-  
+
   useEffect(()=>{
     getTheatres();
   },[date])

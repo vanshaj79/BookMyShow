@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Movie = require("../models/movieModels");
+const Show = require("../models/showModel");
 
 router.post("/add", async (req, res) => {
   try {
@@ -52,11 +53,36 @@ router.get("/getMovieById/:movieId", async (req, res) => {
   }
 });
 
-router.get('/getTheatresByMovieId/:movieId', async (req,res) => {
-  res.send({
-    success:true
-  })  
-})
+router.post("/getTheatresByMovieId", async (req, res) => {
+  try {
+    const { movie, date } = req.body;
+    const shows = Show.find({ movie, date }).populate("theatre");
+
+    // get the unique theatres
+    let uniqueTheatres = [];
+    (await shows).forEach(show =>{
+      const theatre = uniqueTheatres.find(theatre => theatre._id === show.theatre._id)
+      if(!theatre){
+        const showsForThisTheatre = shows.filter((showObj) => showObj.theatre._id === show.theatre._id);
+        uniqueTheatres.push({
+          ...show.theatre._doc,
+          shows:showsForThisTheatre
+        })
+      }
+    })
+    res.send({
+      success: true,
+      message: "Theatres Fetched successfully",
+      data: uniqueTheatres,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: "Something went wrong",
+      data:error
+    });
+  }
+});
 
 router.put("/updateMovie", async (req, res) => {
   try {
