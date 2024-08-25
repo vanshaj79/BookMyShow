@@ -34,6 +34,30 @@ router.get("/getAllMovies", async (req, res) => {
   }
 });
 
+router.get("/getMovieById/:movieId", async (req, res) => {
+  try {
+    const movieId = req.params.movieId;
+    const movie = await Movie.findOne({ _id: movieId });
+    res.send({
+      success: true,
+      message: "Movie Fetched Successfully",
+      data: movie,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: "Something went wrong",
+      data: error,
+    });
+  }
+});
+
+router.get('/getTheatresByMovieId/:movieId', async (req,res) => {
+  res.send({
+    success:true
+  })  
+})
+
 router.put("/updateMovie", async (req, res) => {
   try {
     await Movie.findByIdAndUpdate(req.body.movieId, req.body);

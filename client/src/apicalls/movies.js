@@ -10,6 +10,16 @@ export const GetAllMovies = async () => {
   }
 };
 
+export const GetMovieById = async (movieId) => {
+  const axiosInstance = getAxiosInstance();
+  try {
+    const response = await axiosInstance.get(`/api/movies/getMovieById/${movieId}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const AddMovie = async (payload) => {
   const axiosInstance = getAxiosInstance();
   try {
