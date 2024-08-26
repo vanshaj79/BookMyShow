@@ -9,6 +9,7 @@ import { GetTheatresByMovie } from '../../apicalls/theatres';
 
 const TheatresForMovie = () => {
   const [movie, setMovie] = useState();
+  const [theatres, setTheatres] = useState([]);
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const TheatresForMovie = () => {
       dispatch(showLoading);
       const response = await GetTheatresByMovie({date, movie: movieId});
       if(response.message){
-        console.log(response)
+        setTheatres(response.data)
       }else{
         message.error(response.message)
       }
@@ -45,7 +46,7 @@ const TheatresForMovie = () => {
       message.error(error.message)
     }
   }
-
+console.log(theatres)
   useEffect(()=>{
     getData();
   },[])
@@ -58,7 +59,7 @@ const TheatresForMovie = () => {
     getTheatres();
   },[date])
   return (
-    <div>
+    <>
       {movie && (
         <div>
           {/* movie information */}
@@ -88,9 +89,11 @@ const TheatresForMovie = () => {
               </Row>
             </div>
           </div>
+          <hr></hr>
+          <h1 className='text-lg'>THEATRES</h1>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

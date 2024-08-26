@@ -96,6 +96,22 @@ router.post("/getTheatresByMovieId", async (req, res) => {
   }
 });
 
+router.post("/getShowById", async (req, res) => {
+  try {
+    const show = await Show.findById(req.body.showId).populate("movie").populate("theatre");
+    res.send({
+      success:true,
+      message:"Show Fetched Successfully",
+      data:show
+    })
+  } catch (error) {
+    res.send({
+      success:false,
+      message:"Something went wrong"
+    })
+  }
+});
+
 router.put("/update", async (req, res) => {
   try {
     await Theatre.findByIdAndUpdate(req.body.theatreId, req.body);
