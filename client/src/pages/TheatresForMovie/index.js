@@ -90,11 +90,43 @@ console.log(theatres)
             </div>
           </div>
           <hr></hr>
-          <h1 className='text-lg'>THEATRES</h1>
+          {/* Movie Theatres */}
+          <h1 className="text-xl uppercase mt-2">theatres</h1>
+          <div className="mt-1 flex flex-col gap-1">
+            {theatres.map((theatre) => (
+              <div className="card p-2">
+                <h1 className="text-md uppercase">{theatre.name}</h1>
+                <h1 className="text-sm uppercase">
+                  Address : {theatre.address}
+                </h1>
+                <div className="divider"></div>
+                <div className="flex gap-2">
+                  {theatre.shows
+                    .sort(
+                      (a, b) =>
+                        moment(a.time, "HH:mm") - moment(b.time, "HH:mm")
+                    )
+                    .map((show) => (
+                      <div
+                        key={show._id}
+                        // onMouseEnter={handleMouseEnter}
+                        // onMouseLeave={handleMouseLeave}
+                        className="card p-1 cursor-pointer border-primary"
+                        onClick={() => {navigate(`/book-show/${show._id}`)}}
+                      >
+                        <div className='font-bold'>
+                          {moment(show.time, "HH:mm").format("hh:mm A")}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </>
-  )
+  );
 }
 
 export default TheatresForMovie
