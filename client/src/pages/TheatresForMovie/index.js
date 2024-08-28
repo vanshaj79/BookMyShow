@@ -112,7 +112,7 @@ console.log(theatres)
                         // onMouseEnter={handleMouseEnter}
                         // onMouseLeave={handleMouseLeave}
                         className="card p-1 cursor-pointer border-primary"
-                        onClick={() => {navigate(`/book-show/${show._id}`)}}
+                        onClick={() => {navigate(`/bookshow/${show._id}`)}}
                       >
                         <div className='font-bold'>
                           {moment(show.time, "HH:mm").format("hh:mm A")}
