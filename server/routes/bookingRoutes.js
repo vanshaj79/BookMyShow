@@ -54,4 +54,36 @@ router.post("/bookShow", async (req, res) => {
     }
 })
 
+router.post("/getBookings", async (req, res) => {
+    try {
+        const bookings = await Booking.find({ user: req.body.userId })
+                                        .populate("user")
+                                        .populate({
+                                            path:"show",
+                                            populate:{
+                                                path:"movie",
+                                                model:"movies"
+                                            },
+                                        })
+                                        .populate({
+                                            path:"show",
+                                            populate:{
+                                                path:"theatre",
+                                                model:"theatres",
+                                            },
+                                        });
+    
+        res.send({
+            success:true,
+            message:"Bookings Fetched Successfully",
+            data:bookings
+        })
+    } catch (error) {
+        res.send({
+            success:false,
+            message:error.message
+        })
+    }
+});
+
 exports.router = router;

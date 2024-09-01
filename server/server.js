@@ -26,7 +26,7 @@ app.use('/api/users', userRoutes.router)
 app.use('/api/movies', movieRoutes.router)
 app.use('/api/theatres', theatresRoutes.router)
 app.use('/api/shows', showRoutes.router)
-app.use('/api/book', bookRoutes.router)
+app.use('/api/bookings', bookRoutes.router)
 
 app.listen(8080, () => {
     console.log("Server has started")
